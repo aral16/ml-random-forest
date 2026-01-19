@@ -16,7 +16,7 @@ data:
 
 
 training:
-  mode: "cv"          # "cv" OR "val" cv = cross validation
+  mode: "cv"          # "cv" OR "val" cv =  cross validation
   val_size: 0.2       # used only if mode="val" (split from train, not from full data)
   cv_folds: 5         # used only if mode="cv"
 
