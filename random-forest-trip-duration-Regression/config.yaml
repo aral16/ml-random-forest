@@ -1,0 +1,35 @@
+project:
+  name: "linear-regression-housing"
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  models_dir: "models"
+  reports_dir: "reports"
+  figures_dir: "reports/figures"
+
+data:
+  target_col: "trip_duration"
+  log_target: false # Here Is False because we shouldn't  log transform the target for Decision-tree model
+  id: "id"
+  test_size: 0.30
+  random_state: 42
+
+
+training:
+  mode: "val"          # "cv" OR "val" cv = cross validation
+  val_size: 0.2       # used only if mode="val" (split from train, not from full data)
+  cv_folds: 5         # used only if mode="cv"
+
+model:
+  name: "model.joblib"
+  type: "random_forest" 
+  n_estimators: 300 # Number of trees in the forest(More trees reduce vaiance,improve stability, but too many trees will slower the training)
+  max_depth: 12 # This is the Maximum depth of each tree, high depth captures complex interactions and lower depth smoother generalization.
+  min_samples_leaf: 5 # Minimum number of samples allowed in each leaf.This stabilizes predictions.
+  n_jobs: -1 # controls how many CPU cores the model uses in parallel. (-1 = Use all available cores)
+
+
+evaluation:
+  save_figures: true
+

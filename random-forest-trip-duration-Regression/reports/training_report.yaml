@@ -1,0 +1,13 @@
+training_mode: val
+model:
+  name: model.joblib
+  type: random_forest
+  n_estimators: 300
+  max_depth: 12
+  min_samples_leaf: 5
+  n_jobs: -1
+val:
+  MAE: 471.69443410302523
+  RMSE: 5862.220834993816
+  R2: -0.038277278890862076
+model_path: models/model.joblib

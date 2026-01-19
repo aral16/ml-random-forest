@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Data artifacts
+data/raw/
+data/processed/
+models/*.joblib
+
+
+# Ignore everything in models
+models/*
+
+# BUT keep coefficients.csv
+!models/coefficients.csv
+
+
+# OS
+.DS_Store
