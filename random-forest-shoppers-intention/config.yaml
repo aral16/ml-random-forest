@@ -1,0 +1,46 @@
+project:
+  name: "decision-tree-Heart-disease"
+
+paths:
+  raw_dir: "data/raw"
+  processed_dir: "data/processed"
+  models_dir: "models"
+  reports_dir: "reports"
+  figures_dir: "reports/figures"
+
+data:
+  target_col: "Revenue"
+  log_target: false # Here Is False because we shouldn't log transform for any decision-tree model
+  test_size: 0.30
+  random_state: 42
+
+
+training:
+  mode: "cv"          # "cv" OR "val" cv = cross validation
+  val_size: 0.2       # used only if mode="val" (split from train, not from full data)
+  cv_folds: 5         # used only if mode="cv"
+
+model:
+  name: "model.joblib"
+  type: "random_forest" 
+  n_estimators: 200 # Number of trees in the forest(More trees reduce vaiance,improve stability, but too many trees will slower the training)
+  max_depth: 6 # This is the Maximum depth of each tree, high depth captures complex interactions and lower depth smoother generalization.
+  min_samples_leaf: 5 # Minimum number of samples allowed in each leaf.This stabilizes predictions.
+  oob_score: true # Out-of-Bag validation. We know that for every tree, ~63% of data is used to train it and ~37% is left out (Out-Of-Bag data). So, the remaining ~37% acts as internal validation.
+  class_weight: "balanced"
+
+
+
+evaluation:
+  save_figures: true
+
+  # Threshold selection happens on VAL/OOF (not test)
+  threshold_selection:
+    method: cv          #  cv or "val"
+    strategy: min_recall  # "f1_max", "min_precision", "min_recall", "range" 
+    min_recall: 0.80
+
+    # optional if strategy: "range"
+    precision_range: [0.75, 0.90]
+    recall_range: [0.60, 0.85]
+
